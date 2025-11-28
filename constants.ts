@@ -1,6 +1,7 @@
 import { FinancialMetric, ExitStrategyMetric } from './types';
 
-export const PASSWORD = "Legacy2026";
+// Move secrets to environment variables. Do NOT hardcode passwords or keys in source.
+export const PASSWORD = process.env.PASSWORD || '';
 
 export const FINANCIAL_DATA: FinancialMetric[] = [
   { year: 'Year 1', revenue: 1.76, netProfit: 0.70 },

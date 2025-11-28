@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { FileText, Map, BarChart3, Download, Upload, Plus, Sparkles, X, Terminal } from 'lucide-react';
-import { GoogleGenAI } from "@google/genai";
+// Server-side proxy will perform AI requests; do not use API keys in client code.
 import { DownloadItem } from '../types';
 import { FINANCIAL_DATA, OWNER_LETTER } from '../constants';
 
@@ -41,7 +41,7 @@ const DataRoom: React.FC = () => {
       link.click();
       document.body.removeChild(link);
     } else {
-      console.log(`Downloading static asset: ${doc.name}`);
+            // Static asset; no URL available in this demo. In production, serve files from a secure origin.
     }
   };
 
@@ -62,8 +62,6 @@ const DataRoom: React.FC = () => {
     setDocuments(newDocs);
 
     try {
-        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-        
         let prompt = "";
         
         // Contextual Prompting Logic
@@ -107,15 +105,15 @@ const DataRoom: React.FC = () => {
             }
         }
 
-        const result = await ai.models.generateContent({
-            model: 'gemini-2.5-flash',
-            contents: prompt,
-            config: {
-                systemInstruction: "You are a cynical, high-net-worth real estate investment analyst. You prefer concise, data-driven insights. Use Markdown formatting.",
-            }
+        // Forward the prompt to a secure server-side proxy which holds the API key.
+        const resp = await fetch('/api/ai-proxy', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt }),
         });
 
-        const analysisText = result.text;
+        const json = await resp.json();
+        const analysisText = json.result || json.error || 'No response from AI proxy.';
 
         const updatedDocs = [...documents];
         updatedDocs[index] = { 
@@ -219,7 +217,7 @@ const DataRoom: React.FC = () => {
                             <span className="text-bayou-gold font-mono text-xs uppercase tracking-widest">Gemini 2.5 Flash • Analyst Report</span>
                         </div>
                         <div className="prose prose-invert prose-sm max-w-none font-sans text-stone-300 leading-relaxed">
-                            <div dangerouslySetInnerHTML={{ __html: doc.analysis.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>').replace(/\n/g, '<br />').replace(/- /g, '• ') }} />
+                            <div className="whitespace-pre-wrap text-sm">{doc.analysis}</div>
                         </div>
                     </div>
                 )}
