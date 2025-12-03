@@ -17,6 +17,15 @@ const Gate: React.FC<GateProps> = ({ onUnlock }) => {
   }, []);
 
   const checkAuthentication = async () => {
+    // Check for bypass parameter (development/demo only)
+    const urlParams = new URLSearchParams(window.location.search);
+    const bypass = urlParams.get('bypass');
+
+    if (bypass === 'true') {
+      handleUnlock();
+      return;
+    }
+
     // Check if already authenticated via session
     const authenticated = await isAuthenticated();
     if (authenticated) {
@@ -25,7 +34,6 @@ const Gate: React.FC<GateProps> = ({ onUnlock }) => {
     }
 
     // Check for magic link token in URL
-    const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
 
     if (token) {

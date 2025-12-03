@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, Navigation, TrendingUp, Users } from 'lucide-react';
 import { PARCEL_COORDINATES, KEY_LOCATIONS, MARKET_STATS } from '../constants';
+import InteractiveMap from './InteractiveMap';
 
 const LocationSection: React.FC = () => {
     return (
@@ -19,23 +20,9 @@ const LocationSection: React.FC = () => {
                 <div className="mb-16 bg-stone-900 rounded-xl overflow-hidden border border-stone-800 shadow-2xl">
                     <div className="grid md:grid-cols-2">
 
-                        {/* Map Placeholder */}
+                        {/* Interactive Map */}
                         <div className="relative h-[500px] bg-stone-800">
-                            <iframe
-                                src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3364.${PARCEL_COORDINATES.lat}!2d${PARCEL_COORDINATES.lng}!3d${PARCEL_COORDINATES.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDMxJzIwLjQiTiA5MsKwMjQnNTYuMiJX!5e0!3m2!1sen!2sus!4v1234567890`}
-                                width="100%"
-                                height="100%"
-                                style={{ border: 0 }}
-                                allowFullScreen
-                                loading="lazy"
-                                referrerPolicy="no-referrer-when-downgrade"
-                                title="D'Arbonne Gate Location"
-                            ></iframe>
-
-                            <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur-sm text-white px-4 py-2 rounded text-sm">
-                                <MapPin className="inline w-4 h-4 mr-2 text-bayou-gold" />
-                                {PARCEL_COORDINATES.address}
-                            </div>
+                            <InteractiveMap />
                         </div>
 
                         {/* Distance Info */}
