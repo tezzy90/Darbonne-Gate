@@ -12,6 +12,7 @@ import ROICalculator from './components/ROICalculator';
 import ContactCTA from './components/ContactCTA';
 import LocationSection from './components/LocationSection';
 import HuntingFishingSection from './components/HuntingFishingSection';
+import CaseStudiesSection from './components/CaseStudiesSection';
 import { ChevronDown } from 'lucide-react';
 
 const App: React.FC = () => {
@@ -81,6 +82,9 @@ const App: React.FC = () => {
           {/* New sections for Day 1-2 */}
           <LocationSection />
           <HuntingFishingSection />
+
+          {/* Day 3: Case Studies */}
+          <CaseStudiesSection />
 
           <div id="map">
             <ResortSection />
