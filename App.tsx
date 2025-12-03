@@ -1,3 +1,4 @@
+```
 import React, { useState, useEffect } from 'react';
 import Gate from './components/Gate';
 import LegacySection from './components/LegacySection';
@@ -14,10 +15,16 @@ import LocationSection from './components/LocationSection';
 import HuntingFishingSection from './components/HuntingFishingSection';
 import CaseStudiesSection from './components/CaseStudiesSection';
 import { ChevronDown } from 'lucide-react';
+import { initGA, logPageView } from './lib/analytics';
 
 const App: React.FC = () => {
   const [isLocked, setIsLocked] = useState(true);
   const [showContent, setShowContent] = useState(false);
+
+  useEffect(() => {
+    initGA();
+    logPageView();
+  }, []);
 
   const handleUnlock = () => {
     setIsLocked(false);
@@ -106,21 +113,21 @@ const App: React.FC = () => {
       )}
 
       <style>{`
-        @keyframes fadeInUp {
+@keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
+}
+@keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+}
+        .animate - fade -in -up {
+  animation: fadeInUp 1s ease - out forwards;
+}
+        .animate - fade -in {
+  animation: fadeIn 1.5s ease- out forwards;
         }
-        .animate-fade-in-up {
-            animation: fadeInUp 1s ease-out forwards;
-        }
-        .animate-fade-in {
-            animation: fadeIn 1.5s ease-out forwards;
-        }
-      `}</style>
+`}</style>
     </div>
   );
 };

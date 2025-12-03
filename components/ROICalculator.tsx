@@ -117,17 +117,25 @@ const ROICalculator: React.FC = () => {
     const cashOnCash = (annualCashFlow / investment) * 100;
     const irr = calculateIRR();
 
+    import { logEvent } from '../lib/analytics';
+
+    // ... inside component ...
+
     const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInvestment(Number(e.target.value));
+        // Debounce tracking would be better, but simple log for now
+        if (Math.random() > 0.9) { // Sample 10% of moves to avoid spam
+            logEvent('Engagement', 'ROI Slider Adjusted', `Amount: ${e.target.value}`);
+        }
     };
 
-    const handleExitYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setExitYear(Number(e.target.value));
-    };
+    // ...
 
     // PDF Download Function
     const downloadPDF = () => {
+        logEvent('Conversion', 'PDF Downloaded', 'Investment Summary');
         const doc = new jsPDF();
+        // ... rest of function
 
         // Header
         doc.setFontSize(20);
