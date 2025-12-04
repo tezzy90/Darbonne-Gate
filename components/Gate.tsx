@@ -45,11 +45,14 @@ const Gate: React.FC<GateProps> = ({ onUnlock }) => {
 
   const handleMagicLinkToken = async (token: string) => {
     try {
+      console.log('Validating token:', token);
       const { valid, email, investorName } = await validateToken(token);
+      console.log('Validation result:', { valid, email, investorName });
 
       if (valid && email) {
         // Save session
         saveSession(token, email, investorName);
+        console.log('Session saved');
 
         // Show success message briefly
         setSuccess(`Welcome${investorName ? ', ' + investorName : ''}!`);
@@ -58,12 +61,15 @@ const Gate: React.FC<GateProps> = ({ onUnlock }) => {
         window.history.replaceState({}, document.title, window.location.pathname);
 
         // Unlock after brief delay
+        console.log('Unlocking in 1.5s...');
         setTimeout(() => handleUnlock(), 1500);
       } else {
+        console.error('Token validation failed');
         setError('Invalid or expired access link. Please request a new one.');
         setLoading(false);
       }
     } catch (err) {
+      console.error('Authentication error:', err);
       setError('Authentication error. Please try again.');
       setLoading(false);
     }
