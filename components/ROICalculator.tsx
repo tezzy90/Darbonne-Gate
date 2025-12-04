@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calculator, DollarSign, TrendingUp, Download, PieChart } from 'lucide-react';
 import { jsPDF } from 'jspdf';
+import { logEvent } from '../lib/analytics';
 
 const ROICalculator: React.FC = () => {
     const [investment, setInvestment] = useState<number>(100000);
@@ -117,9 +118,7 @@ const ROICalculator: React.FC = () => {
     const cashOnCash = (annualCashFlow / investment) * 100;
     const irr = calculateIRR();
 
-    import { logEvent } from '../lib/analytics';
 
-    // ... inside component ...
 
     const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInvestment(Number(e.target.value));
