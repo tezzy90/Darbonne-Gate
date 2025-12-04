@@ -112,22 +112,7 @@ const App: React.FC = () => {
         </main>
       )}
 
-      <style>{`
-@keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-}
-        .animate - fade -in -up {
-  animation: fadeInUp 1s ease - out forwards;
-}
-        .animate - fade -in {
-  animation: fadeIn 1.5s ease- out forwards;
-        }
-`}</style>
+
     </div>
   );
 };
