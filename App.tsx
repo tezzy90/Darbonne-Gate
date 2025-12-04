@@ -1,4 +1,4 @@
-```
+
 import React, { useState, useEffect } from 'react';
 import Gate from './components/Gate';
 import LegacySection from './components/LegacySection';
