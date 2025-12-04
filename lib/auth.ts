@@ -25,11 +25,14 @@ export function generateToken(): string {
  */
 export async function createAccessToken(
     email: string,
-    investorName?: string
+    investorName?: string,
+    isAdmin: boolean = false
 ): Promise<string> {
     const token = generateToken();
     const now = new Date();
-    const expiresAt = new Date(now.getTime() + TOKEN_EXPIRY_DAYS * 24 * 60 * 60 * 1000);
+    // Admin tokens never expire (set to 100 years in future)
+    const expiryDays = isAdmin ? 36500 : TOKEN_EXPIRY_DAYS;
+    const expiresAt = new Date(now.getTime() + expiryDays * 24 * 60 * 60 * 1000);
 
     const tokenData: AccessToken = {
         token,

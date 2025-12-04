@@ -25,6 +25,7 @@
     "react-dom": "^19.2.0",
     "react-ga4": "^2.1.0",
     "react-leaflet": "^5.0.0",
+    "react-router-dom": "^7.10.0",
     "recharts": "^3.5.0"
   },
   "devDependencies": {
