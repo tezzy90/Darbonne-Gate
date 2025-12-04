@@ -128,7 +128,9 @@ const ROICalculator: React.FC = () => {
         }
     };
 
-    // ...
+    const handleExitYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setExitYear(Number(e.target.value));
+    };
 
     // PDF Download Function
     const downloadPDF = () => {
