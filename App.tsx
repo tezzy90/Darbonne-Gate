@@ -111,8 +111,6 @@ const App: React.FC = () => {
           <ContactCTA />
         </main>
       )}
-
-
     </div>
   );
 };
